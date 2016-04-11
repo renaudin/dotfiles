@@ -13,20 +13,22 @@ Plugin 'gmarik/Vundle.vim'
 
 " Add all your plugins here (note older versions of Vundle used Bundle instead of Plugin)
 Plugin 'vim-scripts/indentpython.vim'
-Bundle 'Valloric/YouCompleteMe'
+Plugin 'davidhalter/jedi-vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'scrooloose/nerdtree'
-Plugin 'kien/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'jnurmine/Zenburn'
 Plugin 'w0ng/vim-hybrid'
 Plugin 'lervag/vimtex'
 Plugin 'JamshedVesuna/vim-markdown-preview'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'edkolev/tmuxline.vim'
+Plugin 'jalvesaq/Nvim-R'
+Plugin 'ervandew/supertab'
+
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -57,8 +59,14 @@ set backspace=indent,eol,start
 set laststatus=2
 set number
 
+" Disable stupid backup and swap files - they trigger too many events
+" for file system watchers
 set nobackup
+set nowritebackup
 set noswapfile
+"
+" make yank copy to the global system clipboard
+set clipboard=unnamed
 
 if has('gui_running')
 set background=dark
@@ -75,7 +83,10 @@ set gdefault
 set incsearch
 set showmatch
 set hlsearch
-nnoremap <leader><space> :noh<cr>
+
+" Bind nohl
+nnoremap <Leader>h :nohl<CR>
+
 nnoremap <tab> %
 vnoremap <tab> %
 
@@ -83,8 +94,9 @@ set wrap
 set textwidth=79
 set formatoptions=qrn1
 
-"set list
-"set listchars=tab:▸\ ,eol:¬
+" easier moving between tabs
+map <Leader>n <esc>:tabprevious<CR>
+map <Leader>m <esc>:tabnext<CR>
 
 nnoremap <up> <nop>
 nnoremap <down> <nop>
@@ -111,34 +123,19 @@ nnoremap <leader>v V`]
 "quicker escaping through jj
 inoremap jj <ESC>
 
-
+" Movement
+" =========
+" bind Ctrl+<movement> keys to move around the windows, instead of using Ctrl+w + <movement>
 nnoremap <leader>w <C-w>v<C-w>l
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-"Yankring
-nnoremap <silent> <F3> :YRShow<cr>
-inoremap <silent> <F3> <ESC>:YRShow<cr>
-
 let g:ycm_autoclose_preview_window_after_completion=1
 map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
-"python with virtualenv support
-py << EOF
-import os
-import sys
-if 'VIRTUAL_ENV' in os.environ:
-  project_base_dir = os.environ['VIRTUAL_ENV']
-  activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-  execfile(activate_this, dict(__file__=activate_this))
-EOF
-let python_highlight_all=1
-syntax on
-
-
-map <Leader>n <plug>NERDTreeTabsToggle<CR>
+map <Leader>t <plug>NERDTreeTabsToggle<CR>
 
 "airline parameters
 let g:airline#extensions#tabline#enabled = 1
@@ -166,3 +163,16 @@ let g:syntastic_check_on_wq = 0
 "Synstastic disabled by default
 let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
 nnoremap <C-w>E :SyntasticCheck<CR> :SyntasticToggleMode<CR>
+
+"Python
+"==================
+"Vim configuration for python
+"python with virtualenv support
+py << EOF
+import os
+import sys
+if 'VIRTUAL_ENV' in os.environ:
+  project_base_dir = os.environ['VIRTUAL_ENV']
+  activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+  execfile(activate_this, dict(__file__=activate_this))
+EOF
