@@ -1,0 +1,17 @@
+# .bashrc
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+	. /etc/bashrc
+fi
+
+# AFS@CERN configuration
+AFS=/afs/cern.ch/user/v/vrenaudi/
+
+
+. $HOME/.shells/defaults
+. $HOME/.shells/functions
+. $HOME/.shells/exports
+. $HOME/.shells/alias
+. $HOME/.shells/prompt
+                                   
