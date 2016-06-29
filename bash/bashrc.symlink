@@ -15,3 +15,7 @@ AFS=/afs/cern.ch/user/v/vrenaudi/
 . $HOME/.shells/alias
 . $HOME/.shells/prompt
                                    
+
+
+# added by Anaconda2 4.1.0 installer
+export PATH="/home/renaudin/anaconda2/bin:$PATH"
