@@ -1,0 +1,36 @@
+# Cute shell shortcuts
+alias ls='ls --sort=extension --color=auto'
+alias ll='ls -lh'
+alias lal='ls -alh'
+alias la='ls -A'
+alias lh='ls -lht'
+
+alias grep='grep --color -n'
+
+
+# Some more, to avoid mistakes
+alias rm='rm -vi'
+alias cp='cp -vi'
+alias mv='mv -vi'
+
+
+# Directory navigation aliases
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+
+# lxplus Alias
+alias lxplus='ssh -Y lxplus'
+
+#tar
+alias newtar='tar -zcvf'
+alias extar='tar -zxvf'
+
+#ROOT
+#alias root='root -l'
+
+# Shortcut to test quick changes to bashrc
+alias reload='source ~/.bashrc'
+
+
