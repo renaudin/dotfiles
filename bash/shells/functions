@@ -22,3 +22,8 @@ function extract () {
 weather(){
 curl wttr.in/$1
 }
+
+afsconf(){
+kinit vrenaudi@CERN.CH && aklog -c cern.ch -k CERN.CH
+}
+

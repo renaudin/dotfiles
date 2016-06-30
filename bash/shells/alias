@@ -21,8 +21,6 @@ alias ....='cd ../../..'
 alias .....='cd ../../../..'
 
 # lxplus Alias
-alias afsconnect='aklog -c cern.ch -k CERN.CH'
-alias afspwd='kinit vrenaudi@CERN.CH'
 alias lxplus='ssh -Y lxplus'
 
 #tar
@@ -30,9 +28,9 @@ alias newtar='tar -zcvf'
 alias extar='tar -zxvf'
 
 #ROOT
-alias root='root -l'
+#alias root='root -l'
 
 # Shortcut to test quick changes to bashrc
-alias reload='source ~/.bashrc'
+alias reload_bashrc='source ~/.bashrc'
 
 

@@ -8,10 +8,7 @@ HISTFILESIZE=10000
 shopt -s histappend
 export HISTCONTROL=ignoredups
 
-
 force_color_prompt=yes
-
-
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -19,9 +16,6 @@ force_color_prompt=yes
 if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
 fi
-
-
-
     
 ## some shopt options ##
 # check the window size after each command and, if necessary,
@@ -33,9 +27,6 @@ shopt -s cdspell
 shopt -s dotglob
 shopt -s nocaseglob
 
-
-
-
-
-
+# allow multiple bash windows to write to the history
+shopt -s histappend
 

@@ -1,22 +1,25 @@
 #EDITOR
 export EDITOR='vim'
 
-PYTHONPATH=$PYTHONPATH:$HOME/lb2lctaunu-analysis/cuts
-export PYTHONPATH
 
-export PATH=${HOME}/.local/bin${PATH:+:$PATH}
+# added by Anaconda2 4.1.0 installer
+export PATH="/home/renaudin/anaconda2/bin:$PATH"
 
-#ROOT Configuration
-cd ~
-cd ROOT/root
-. bin/thisroot.sh
-cd
-
-# Export needed by ROOT
-export LD_LIBRARY_PATH=$ROOTSYS/lib:$PYTHONDIR/lib:$LD_LIBRARY_PATH
-export PATH=$ROOTSYS/bin:$PATH
-export PYTHONPATH=$ROOTSYS/lib:$PYTHONPATH
+# LHCB docs
 export DLHCB=svn+ssh://vrenaudi@cern.ch/reps/lhcbdocs
 
-#Anaconda export
-export PATH="home/renaudin/anaconda2/bin:$PATH"
+# AFS@CERN configuration
+AFS=/afs/cern.ch/user/v/vrenaudi/
+
+#ROOT Configuration
+function rootconf(){
+    cd ~
+    cd ROOT/root
+    . bin/thisroot.sh
+    cd
+    
+    # Export needed by ROOT
+    export LD_LIBRARY_PATH=$ROOTSYS/lib:$PYTHONDIR/lib:$LD_LIBRARY_PATH
+    export PATH=$ROOTSYS/bin:$PATH
+    export PYTHONPATH=$ROOTSYS/lib:$PYTHONPATH
+}
