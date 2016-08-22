@@ -11,3 +11,5 @@ fi
 . $HOME/.shells/alias
 . $HOME/.shells/prompt
                                    
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

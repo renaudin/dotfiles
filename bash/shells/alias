@@ -30,7 +30,11 @@ alias extar='tar -zxvf'
 #ROOT
 #alias root='root -l'
 
+#Anaconca env
+alias phys='source activate root && source /home/renaudin/anaconda2/bin/thisroot.sh'
+alias nophys='source deactivate'
+
 # Shortcut to test quick changes to bashrc
-alias reload_bashrc='source ~/.bashrc'
+alias reload='source ~/.bashrc'
 
 

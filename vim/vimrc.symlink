@@ -1,52 +1,54 @@
 set nocompatible              " required
 filetype off                  " required
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall | source $MYVIMRC
+endif
 
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+call plug#begin('~/.vim/plugged')
 
-" let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
-
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-unimpaired'
-Plugin 'tpope/vim-rhubarb'
-Plugin 'tpope/vim-speeddating'
-Plugin 'sjl/gundo.vim'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'junegunn/vim-easy-align'
-Plugin 'jayflo/vim-skip'
-
-Plugin 'srstevenson/vim-decfile'
-
-Plugin 'sheerun/vim-polyglot'
-Plugin 'davidhalter/jedi-vim'
-Plugin 'scrooloose/syntastic'
-
-Plugin 'jistr/vim-nerdtree-tabs'
-Plugin 'scrooloose/nerdtree'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'w0ng/vim-hybrid'
-Plugin 'LaTeX-Box-Team/LaTeX-Box'
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'edkolev/tmuxline.vim'
-Plugin 'jalvesaq/Nvim-R'
-Plugin 'ervandew/supertab'
-Plugin 'easymotion/vim-easymotion'
-
-Plugin 'ivanov/vim-ipython'
-
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-rhubarb'
+Plug 'tpope/vim-speeddating'
+Plug 'sjl/gundo.vim'
+Plug 'airblade/vim-gitgutter'
+Plug 'junegunn/vim-easy-align'
+Plug 'jayflo/vim-skip'
+Plug 'srstevenson/vim-decfile'
+Plug 'sheerun/vim-polyglot'
+Plug 'scrooloose/syntastic'
+Plug 'jistr/vim-nerdtree-tabs'
+Plug 'scrooloose/nerdtree'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'w0ng/vim-hybrid'
+Plug 'LaTeX-Box-Team/LaTeX-Box'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'edkolev/tmuxline.vim'
+Plug 'jalvesaq/Nvim-R'
+Plug 'ervandew/supertab'
+Plug 'easymotion/vim-easymotion'
+Plug 'davidhalter/jedi-vim'
+Plug 'vim-scripts/OmniCppComplete'
+Plug 'cjrh/vim-conda'
+Plug 'neilagabriel/vim-geeknote'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'ryanoasis/vim-devicons'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 " All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-syntax on
+call plug#end()            " required
+
+set encoding=utf8
+set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Plus\ Nerd\ File\ Types\ 11
+
+set omnifunc=syntaxcomplete#Complete
+
 set nocompatible
 set modelines=0
 
@@ -83,7 +85,7 @@ set clipboard=unnamed
 
 if has('gui_running')
 set background=dark
-colorscheme hybrid 
+colorscheme desert 
 set cursorline
 
 endif
@@ -100,7 +102,7 @@ set showmatch
 set hlsearch
 
 " Bind nohl
-nnoremap <Leader>h :nohl<CR>
+nnoremap <Leader>h <esc>:nohl<CR>
 
 nnoremap <tab> %
 vnoremap <tab> %
@@ -133,6 +135,12 @@ inoremap jj <ESC>
 "toggle paste mode
 set pastetoggle=<F2>
 
+"geeknote toggle
+noremap <F7> :Geeknote<cr>
+
+"conda environment
+map <F4> :CondaChangeEnv<CR>
+
 
 " Movement
 " =========
@@ -143,7 +151,12 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-map <Leader>t <plug>NERDTreeTabsToggle<CR>
+" NERDTree settings
+nmap <silent> <F7> :NERDTreeToggle<CR>
+let NERDTreeShowHidden=0
+
+" geeknote
+noremap <F8> :Geeknote<cr>
 
 "airline parameters
 let g:airline#extensions#tabline#enabled = 1
@@ -170,17 +183,11 @@ let g:syntastic_check_on_wq = 0
 
 "Synstastic disabled by default
 let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
-nnoremap <C-w>E :SyntasticCheck<CR> :SyntasticToggleMode<CR>
+nnoremap <C-w> :SyntasticCheck<CR> :SyntasticToggleMode<CR>
 
-"Python
-"==================
-"Vim configuration for python
-"python with virtualenv support
-"py << EOF
-"import os
-"import sys
-"if 'VIRTUAL_ENV' in os.environ:
-"  project_base_dir = os.environ['VIRTUAL_ENV']
-"  activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-"  execfile(activate_this, dict(__file__=activate_this))
-"EOF
+"Jedi-vim settings
+let g:jedi#popup_select_firt = 0
+
+"omni-completion
+let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
+let g:SuperTabDefaultCompletionType = "context"
