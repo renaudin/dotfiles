@@ -36,11 +36,9 @@ Plug 'ervandew/supertab'
 Plug 'easymotion/vim-easymotion'
 Plug 'davidhalter/jedi-vim'
 Plug 'vim-scripts/OmniCppComplete'
-Plug 'cjrh/vim-conda'
-Plug 'neilagabriel/vim-geeknote'
+"Plug 'neilagabriel/vim-geeknote'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'ryanoasis/vim-devicons'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 " All of your Plugins must be added before the following line
 call plug#end()            " required
 
@@ -135,13 +133,6 @@ inoremap jj <ESC>
 "toggle paste mode
 set pastetoggle=<F2>
 
-"geeknote toggle
-noremap <F7> :Geeknote<cr>
-
-"conda environment
-map <F4> :CondaChangeEnv<CR>
-
-
 " Movement
 " =========
 " bind Ctrl+<movement> keys to move around the windows, instead of using Ctrl+w + <movement>
@@ -156,7 +147,7 @@ nmap <silent> <F7> :NERDTreeToggle<CR>
 let NERDTreeShowHidden=0
 
 " geeknote
-noremap <F8> :Geeknote<cr>
+"noremap <F8> :Geeknote<cr>
 
 "airline parameters
 let g:airline#extensions#tabline#enabled = 1

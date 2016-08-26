@@ -2,8 +2,8 @@
 export EDITOR='vim'
 
 
-# added by Anaconda2 4.1.0 installer
-export PATH="$PATH:/home/renaudin/anaconda2/bin"
+# added by Anaconda2 4.1.1 installer
+export PATH="$PATH:/home/renaudin/.anaconda/bin"
 
 # LHCB docs
 export DLHCB=svn+ssh://vrenaudi@cern.ch/reps/lhcbdocs

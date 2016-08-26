@@ -12,4 +12,4 @@ fi
 . $HOME/.shells/prompt
                                    
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
