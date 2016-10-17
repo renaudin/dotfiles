@@ -85,7 +85,6 @@ set clipboard=unnamed
 if has('gui_running')
     set guioptions-=T
     set background=dark
-    colorscheme desert 
     set cursorline
 endif
 
