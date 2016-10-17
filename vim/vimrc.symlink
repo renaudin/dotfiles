@@ -27,23 +27,24 @@ Plug 'scrooloose/nerdtree'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'w0ng/vim-hybrid'
 Plug 'LaTeX-Box-Team/LaTeX-Box'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'edkolev/tmuxline.vim'
-Plug 'jalvesaq/Nvim-R'
 Plug 'ervandew/supertab'
 Plug 'easymotion/vim-easymotion'
 Plug 'davidhalter/jedi-vim'
 Plug 'vim-scripts/OmniCppComplete'
-"Plug 'neilagabriel/vim-geeknote'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'ryanoasis/vim-devicons'
+Plug 'junegunn/limelight.vim'
+Plug 'junegunn/goyo.vim'
+Plug 'fmoralesc/vim-pinpoint'
+
 " All of your Plugins must be added before the following line
 call plug#end()            " required
 
 set encoding=utf8
-set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Plus\ Nerd\ File\ Types\ 11
+"set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Plus\ Nerd\ File\ Types\ 11
 
 set omnifunc=syntaxcomplete#Complete
 
@@ -82,11 +83,17 @@ set noswapfile
 set clipboard=unnamed
 
 if has('gui_running')
-set background=dark
-colorscheme desert 
-set cursorline
-
+    set guioptions-=T
+    set background=dark
+    colorscheme desert 
+    set cursorline
 endif
+
+" change colorscheme for vimdiff to increase readibility
+if &diff
+        colorscheme desert
+    endif
+
 let mapleader = ","
 
 nnoremap / /\v
@@ -146,14 +153,11 @@ nnoremap <C-l> <C-w>l
 nmap <silent> <F7> :NERDTreeToggle<CR>
 let NERDTreeShowHidden=0
 
-" geeknote
-"noremap <F8> :Geeknote<cr>
-
 "airline parameters
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#tmuxline#enabled = 1
-let g:airline_theme='molokai'
+let g:airline_theme='luna'
 " air-line
 let g:airline_powerline_fonts = 1
 
