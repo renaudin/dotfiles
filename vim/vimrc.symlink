@@ -11,19 +11,16 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-speeddating'
-Plug 'sjl/gundo.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'junegunn/vim-easy-align'
 Plug 'jayflo/vim-skip'
-Plug 'srstevenson/vim-decfile'
 Plug 'sheerun/vim-polyglot'
 Plug 'scrooloose/syntastic'
-Plug 'jistr/vim-nerdtree-tabs'
-Plug 'scrooloose/nerdtree'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -31,21 +28,16 @@ Plug 'LaTeX-Box-Team/LaTeX-Box'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'edkolev/tmuxline.vim'
 Plug 'ervandew/supertab'
-Plug 'easymotion/vim-easymotion'
 Plug 'davidhalter/jedi-vim'
 Plug 'vim-scripts/OmniCppComplete'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'ryanoasis/vim-devicons'
-Plug 'junegunn/limelight.vim'
-Plug 'junegunn/goyo.vim'
-Plug 'fmoralesc/vim-pinpoint'
 Plug 'Raimondi/delimitMate'
 
 " All of your Plugins must be added before the following line
 call plug#end()            " required
 
 set encoding=utf8
-"set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Plus\ Nerd\ File\ Types\ 11
+"set guifont=Droid\ Sans\ Mono\ for\ Powerline\ 11
 
 set omnifunc=syntaxcomplete#Complete
 
@@ -148,10 +140,6 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
-
-" NERDTree settings
-nmap <silent> <F7> :NERDTreeToggle<CR>
-let NERDTreeShowHidden=0
 
 "airline parameters
 let g:airline#extensions#tabline#enabled = 1
