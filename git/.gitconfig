@@ -1,0 +1,7 @@
+[user]
+	name = Victor Renaudin
+	email = renaudin@lal.in2p3.fr
+[push]
+	default = simple
+[core]
+	editor = vim

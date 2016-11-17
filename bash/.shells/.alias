@@ -1,11 +1,12 @@
 # Cute shell shortcuts
 alias ls='ls --sort=extension --color=auto'
 alias ll='ls -lh'
+alias l='ls -lh'
 alias lal='ls -alh'
 alias la='ls -A'
 alias lh='ls -lht'
 
-alias grep='grep --color -n'
+alias grep='grep --color'
 
 
 # Some more, to avoid mistakes
