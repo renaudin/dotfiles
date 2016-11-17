@@ -7,13 +7,15 @@ alias la='ls -A'
 alias lh='ls -lht'
 
 alias grep='grep --color'
-
+alias tmux='tmux -2'
 
 # Some more, to avoid mistakes
 alias rm='rm -vi'
 alias cp='cp -vi'
 alias mv='mv -vi'
 
+# Cool colors for Man Pages
+alias man="TERMINFO=~/.terminfo TERM=mostlike LESS=C PAGER=less man"
 
 # Directory navigation aliases
 alias ..='cd ..'

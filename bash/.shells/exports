@@ -1,9 +1,7 @@
 #EDITOR
 export EDITOR='vim'
 
-
-# added by Anaconda2 4.1.1 installer
-export PATH="$PATH:/home/renaudin/.anaconda/bin"
+export PATH="$PATH:/home/renaudin/Marp"
 
 # LHCB docs
 export DLHCB=svn+ssh://vrenaudi@cern.ch/reps/lhcbdocs
@@ -13,8 +11,7 @@ AFS=/afs/cern.ch/user/v/vrenaudi/
 
 #ROOT Configuration
 function rootconf(){
-    cd ~
-    cd ROOT/root
+    cd ~/root
     . bin/thisroot.sh
     cd
     
