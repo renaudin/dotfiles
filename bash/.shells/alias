@@ -23,7 +23,7 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
 
-# lxplus Alias
+# lxplus alias
 alias lxplus='ssh -Y lxplus'
 
 #tar
@@ -32,6 +32,10 @@ alias extar='tar -zxvf'
 
 #ROOT
 #alias root='root -l'
+
+#python shortcuts
+alias pc='python -c'
+alias ipy='ipython'
 
 # Shortcut to test quick changes to bashrc
 alias reload='source ~/.bashrc'

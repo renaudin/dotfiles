@@ -27,3 +27,6 @@ afsconf(){
 kinit vrenaudi@CERN.CH && aklog -c cern.ch -k CERN.CH
 }
 
+lhelp() {
+$1 --help | less
+}
