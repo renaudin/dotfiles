@@ -1,0 +1,51 @@
+[global_config]
+  always_on_top = True
+  enabled_plugins = LaunchpadCodeURLHandler, APTURLHandler, LaunchpadBugURLHandler
+  inactive_color_offset = 1.0
+  tab_position = hidden
+  title_font = Sans 6
+  title_transmit_bg_color = "#c0bebf"
+  title_transmit_fg_color = "#000000"
+  title_use_system_font = False
+[keybindings]
+  copy = <Primary><Alt>c
+  go_down = <Alt>j
+  go_left = <Alt>h
+  go_right = <Alt>l
+  go_up = <Alt>k
+  move_tab_left = <Shift><Super>h
+  move_tab_right = <Shift><Super>l
+  next_tab = <Primary>n
+  paste = <Primary><Alt>v
+  prev_tab = <Primary>p
+  resize_down = <Primary><Shift>j
+  resize_left = <Primary><Shift>h
+  resize_right = <Primary><Shift>l
+  resize_up = <Primary><Shift>k
+  split_horiz = <Primary><Shift>6
+  split_vert = <Primary><Shift>ISO_Level3_Shift
+[layouts]
+  [[default]]
+    [[[child1]]]
+      parent = window0
+      profile = myprofile
+      type = Terminal
+    [[[window0]]]
+      parent = ""
+      type = Window
+[plugins]
+[profiles]
+  [[default]]
+    background_color = "#002b36"
+    background_image = None
+    foreground_color = "#839496"
+    palette = "#073642:#dc322f:#859900:#b58900:#268bd2:#d33682:#2aa198:#eee8d5:#002b36:#cb4b16:#586e75:#657b83:#839496:#6c71c4:#93a1a1:#fdf6e3"
+    use_system_font = False
+  [[myprofile]]
+    background_color = "#002b36"
+    background_image = None
+    font = DroidSansMonoForPowerline Nerd Font 8
+    foreground_color = "#839496"
+    palette = "#073642:#dc322f:#859900:#b58900:#268bd2:#d33682:#2aa198:#eee8d5:#002b36:#cb4b16:#586e75:#657b83:#839496:#6c71c4:#93a1a1:#fdf6e3"
+    scrollback_lines = 10000
+    use_system_font = False
