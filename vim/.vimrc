@@ -19,12 +19,13 @@ Plug 'tpope/vim-speeddating'
 Plug 'airblade/vim-gitgutter'
 Plug 'junegunn/vim-easy-align'
 Plug 'jayflo/vim-skip'
-Plug 'sheerun/vim-polyglot'
 Plug 'scrooloose/syntastic'
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'lervag/vimtex'
+Plug 'blueyed/vim-diminactive'
+"Plug 'python-mode/python-mode'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'LaTeX-Box-Team/LaTeX-Box'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'edkolev/tmuxline.vim'
 Plug 'ervandew/supertab'
@@ -32,15 +33,16 @@ Plug 'davidhalter/jedi-vim'
 Plug 'vim-scripts/OmniCppComplete'
 Plug 'ryanoasis/vim-devicons'
 Plug 'Raimondi/delimitMate'
+Plug 'Yggdroot/indentLine'
 
 " All of your Plugins must be added before the following line
 call plug#end()            " required
 
 set encoding=utf8
-"set guifont=Droid\ Sans\ Mono\ for\ Powerline\ 11
+set guifont=Source\ Code\ Pro\ for\ Powerline\ Regular
 
 set omnifunc=syntaxcomplete#Complete
-
+set t_Co=256
 set nocompatible
 set modelines=0
 
@@ -49,7 +51,6 @@ set shiftwidth=4
 set softtabstop=4
 set expandtab
 
-set encoding=utf-8
 set scrolloff=3
 set autoindent
 set showmode
@@ -79,11 +80,12 @@ if has('gui_running')
     set guioptions-=T
     set background=dark
     set cursorline
+    colorscheme torte
 endif
-
-" change colorscheme for vimdiff to increase readibility
+"
+"scheme for vimdiff to increase readibility
 if &diff
-        colorscheme desert
+        colorscheme blue
     endif
 
 let mapleader = ","
@@ -152,6 +154,29 @@ let g:airline_powerline_fonts = 1
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
+"
+"unicode symbols
+"let g:airline_left_sep = '»'
+"let g:airline_left_sep = '▶'
+"let g:airline_right_sep = '«'
+"let g:airline_right_sep = '◀'
+"let g:airline_symbols.linenr = '␊'
+"let g:airline_symbols.linenr = '␤'
+"let g:airline_symbols.linenr = '¶'
+"let g:airline_symbols.branch = '⎇'
+"let g:airline_symbols.paste = 'ρ'
+"let g:airline_symbols.paste = 'Þ'
+"let g:airline_symbols.paste = '∥'
+"let g:airline_symbols.whitespace = 'Ξ'
+"
+"" airline symbols
+"let g:airline_left_sep = ''
+"let g:airline_left_alt_sep = ''
+"let g:airline_right_sep = ''
+"let g:airline_right_alt_sep = ''
+"let g:airline_symbols.branch = ''
+"let g:airline_symbols.readonly = ''
+"let g:airline_symbols.linenr = ''
 
 
 "syntastic
