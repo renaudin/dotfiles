@@ -33,7 +33,7 @@ Plug 'davidhalter/jedi-vim'
 Plug 'vim-scripts/OmniCppComplete'
 Plug 'ryanoasis/vim-devicons'
 Plug 'Raimondi/delimitMate'
-Plug 'Yggdroot/indentLine'
+Plug 'wellle/targets.vim'
 
 " All of your Plugins must be added before the following line
 call plug#end()            " required
