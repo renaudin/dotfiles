@@ -9,34 +9,47 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-vinegar'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-unimpaired'
-Plug 'tpope/vim-rhubarb'
-Plug 'tpope/vim-speeddating'
 Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-speeddating'
+Plug 'tpope/vim-repeat'
+Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/vim-easy-align'
-Plug 'jayflo/vim-skip'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'justinmk/vim-sneak'
 Plug 'scrooloose/syntastic'
-Plug 'ctrlpvim/ctrlp.vim'
+Plug 'sheerun/vim-polyglot'
 Plug 'lervag/vimtex'
-Plug 'blueyed/vim-diminactive'
-"Plug 'python-mode/python-mode'
+Plug 'ehamberg/vim-cute-python'
+Plug 'sheerun/vim-polyglot'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'edkolev/tmuxline.vim'
-Plug 'ervandew/supertab'
 Plug 'davidhalter/jedi-vim'
-Plug 'vim-scripts/OmniCppComplete'
+Plug 'edkolev/tmuxline.vim'
+Plug 'blueyed/vim-diminactive'
+Plug 'ervandew/supertab'
 Plug 'ryanoasis/vim-devicons'
-Plug 'Raimondi/delimitMate'
 Plug 'wellle/targets.vim'
 
 " All of your Plugins must be added before the following line
 call plug#end()            " required
+
+" Search from the git repo root, if we're in a repo, else the cwd
+function FuzzyFind()
+  " Contains a null-byte that is stripped.
+  let gitparent=system('git rev-parse --show-toplevel')[:-2]
+  if empty(matchstr(gitparent, '^fatal:.*'))
+    silent execute ':FZF -m ' . gitparent
+  else
+    silent execute ':FZF -m .'
+  endif
+endfunction
+
+nnoremap <c-p> :call FuzzyFind()<cr>
 
 set encoding=utf8
 set guifont=Source\ Code\ Pro\ for\ Powerline\ Regular
@@ -82,13 +95,13 @@ if has('gui_running')
     set cursorline
     colorscheme torte
 endif
-"
+
 "scheme for vimdiff to increase readibility
 if &diff
         colorscheme blue
     endif
 
-let mapleader = ","
+let mapleader = "\<Space>"
 
 nnoremap / /\v
 vnoremap / /\v
