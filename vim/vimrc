@@ -23,7 +23,6 @@ Plug 'justinmk/vim-sneak'
 Plug 'scrooloose/syntastic'
 Plug 'sheerun/vim-polyglot'
 Plug 'lervag/vimtex'
-Plug 'ehamberg/vim-cute-python'
 Plug 'sheerun/vim-polyglot'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -34,6 +33,8 @@ Plug 'blueyed/vim-diminactive'
 Plug 'ervandew/supertab'
 Plug 'ryanoasis/vim-devicons'
 Plug 'wellle/targets.vim'
+Plug 'chriskempson/base16-vim'
+Plug 'bronson/vim-trailing-whitespace'
 
 " All of your Plugins must be added before the following line
 call plug#end()            " required
@@ -56,8 +57,12 @@ set guifont=Source\ Code\ Pro\ for\ Powerline\ Regular
 
 set omnifunc=syntaxcomplete#Complete
 set t_Co=256
+let base16colorspace=256
 set nocompatible
 set modelines=0
+
+set background=light
+colorscheme base16-default-light
 
 set tabstop=4
 set shiftwidth=4

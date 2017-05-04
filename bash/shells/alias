@@ -1,10 +1,12 @@
 # Cute shell shortcuts
-alias ls='ls --sort=extension --color=auto'
+alias ls='ls --sort=extension --color=always'
 alias ll='ls -lh'
 alias l='ls -lh'
 alias lal='ls -alh'
 alias la='ls -A'
 alias lh='ls -lht'
+
+alias less='less -R'
 
 alias grep='grep --color'
 alias tmux='tmux -2'
@@ -28,16 +30,20 @@ alias .....='cd ../../../..'
 # lxplus alias
 alias cern='ssh -Y lxplus'
 
+#test neovim
+alias vim='nvim'
+
 #tar
 alias newtar='tar -zcvf'
 alias extar='tar -zxvf'
 
 #ROOT
-#alias root='root -l'
+alias root='root -l'
 
 #python shortcuts
 alias pc='python -c'
-alias ipy='ipython'
+alias ipy='ipython --matplotlib'
+alias condaconf='source ~/conda_setup.sh'
 
 # Shortcut to test quick changes to bashrc
 alias reload='source ~/.bashrc'
