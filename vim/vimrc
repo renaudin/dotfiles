@@ -11,7 +11,7 @@ call plug#begin('~/.vim/plugged')
 
 " design
 Plug 'edkolev/tmuxline.vim'
-Plug 'chriskempson/base16-vim'
+Plug 'arcticicestudio/nord-vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
@@ -27,26 +27,27 @@ Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'justinmk/vim-sneak'
-Plug 'sheerun/vim-polyglot'
-Plug 'lervag/vimtex'
-Plug 'sheerun/vim-polyglot'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'vim-latex/vim-latex'
 Plug 'blueyed/vim-diminactive'
 Plug 'ervandew/supertab'
 Plug 'ryanoasis/vim-devicons'
 Plug 'wellle/targets.vim'
 Plug 'bronson/vim-trailing-whitespace'
 
-Plug 'Shougo/neocomplete'
+Plug 'Valloric/YouCompleteMe'
 
 " Track the engine.
 Plug 'SirVer/ultisnips'
 " Snippets are separated from the engine. Add this if you want them:
 Plug 'honza/vim-snippets'
+Plug 'w0rp/ale'
 
 Plug 'davidhalter/jedi-vim'
-Plug 'scrooloose/syntastic'
 Plug 'majutsushi/tagbar'
+Plug 'fisadev/vim-isort'
+Plug 'JamshedVesuna/vim-markdown-preview'
+Plug 'python-mode/python-mode'
 " All of your Plugins must be added before the following line
 call plug#end()            " required
 
@@ -64,8 +65,8 @@ endfunction
 nnoremap <c-p> :call FuzzyFind()<cr>
 
 let g:python_host_prog = '/usr/bin/python'
-let g:python2_host_prog = '/usr/bin/python27'
-let g:python3_host_prog = '/usr/bin/python3.5'
+" let g:python2_host_prog = '/usr/bin/python27'
+" let g:python3_host_prog = '/usr/bin/python3.5'
 
 let g:ycm_python_binary_path = 'python'
 
@@ -79,7 +80,8 @@ set nocompatible
 set modelines=0
 
 set background=light
-colorscheme base16-default-light
+" colorscheme base16-default-light
+colorscheme nord
 
 set tabstop=4
 set shiftwidth=4
@@ -110,13 +112,6 @@ set noswapfile
 "
 " make yank copy to the global system clipboard
 set clipboard=unnamed
-
-if has('gui_running')
-    set guioptions-=T
-    set background=dark
-    set cursorline
-    colorscheme torte
-endif
 
 "scheme for vimdiff to increase readibility
 if &diff
@@ -165,7 +160,7 @@ nmap <F8> :TagbarToggle<CR>
 " Easy align interactive
 vnoremap <silent> <Enter> :EasyAlign<cr>
 " Bind nohl
-nnoremap <Leader>b <esc>:nohl<CR>
+nnoremap <Leader>, <esc>:nohl<CR>
 
 " to split vertically
 nnoremap <leader>v <C-w>v<C-w>l
@@ -190,7 +185,7 @@ nnoremap <C-l> <C-w>l
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#tmuxline#enabled = 1
-let g:airline_theme='luna'
+let g:airline_theme='nord'
 " air-line
 let g:airline_powerline_fonts = 1
 
@@ -199,33 +194,18 @@ if !exists('g:airline_symbols')
 endif
 
 "syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 0
 
 "Synstastic disabled by default
-let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
-nnoremap <C-w> :SyntasticCheck<CR> :SyntasticToggleMode<CR>
-
-" completion settings
-" Neocomplete
-let g:neocomplete#enable_at_startup = 1
-let g:neocomplete#enable_smart_case = 1
-autocmd FileType python setlocal omnifunc=jedi#completions
-let g:jedi#completions_enabled = 0
-let g:jedi#auto_vim_configuration = 0
-
-if !exists('g:neocomplete#force_omni_input_patterns')
-        let g:neocomplete#force_omni_input_patterns = {}
-endif
-
-" let g:neocomplete#force_omni_input_patterns.python = '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
-let g:neocomplete#force_omni_input_patterns.python = '\h\w*\|[^. \t]\.\w*'
+" let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
+" nnoremap <C-w> :SyntasticCheck<CR> :SyntasticToggleMode<CR>
 
 " snippets
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
@@ -235,3 +215,12 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
+
+" pymode settings
+let g:pymode_python = 'python3'
+let g:pymode_lint_on_write = 1
+let g:pymode_rope = 0
+let g:pymode_rope_complete_on_dot = 0
+let g:pymode_lint_checkers = ['pyflakes', 'pylint', 'mccabe', 'pep8', 'pep257']
+let g:pymode_folding = 0
+let g:pymode_lint_ignore = "F405, F403, E501"
