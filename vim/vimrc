@@ -1,3 +1,5 @@
+" My .vimrc file
+
 set nocompatible              " required
 filetype off                  " required
 
@@ -8,46 +10,44 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
-
 " design
 Plug 'edkolev/tmuxline.vim'
 Plug 'arcticicestudio/nord-vim'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-
-" integration of several tools
+Plug 'itchyny/lightline.vim'
+" git integration
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
+" integration of several tools
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-repeat'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/vim-easy-align'
+Plug 'nathanaelkane/vim-indent-guides'
+" File manipulation
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
+Plug 'mileszs/ack.vim'
 Plug 'justinmk/vim-sneak'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'vim-latex/vim-latex'
 Plug 'blueyed/vim-diminactive'
 Plug 'ervandew/supertab'
-Plug 'ryanoasis/vim-devicons'
 Plug 'wellle/targets.vim'
 Plug 'bronson/vim-trailing-whitespace'
-
-Plug 'Valloric/YouCompleteMe'
-
-" Track the engine.
-Plug 'SirVer/ultisnips'
-" Snippets are separated from the engine. Add this if you want them:
-Plug 'honza/vim-snippets'
-Plug 'w0rp/ale'
-
-Plug 'davidhalter/jedi-vim'
 Plug 'majutsushi/tagbar'
+Plug 'christoomey/vim-tmux-navigator'
+" Writing documentation
+Plug 'lervag/vimtex'
+Plug 'junegunn/goyo.vim'
+" Languages integration
+Plug 'sheerun/vim-polyglot'
 Plug 'fisadev/vim-isort'
 Plug 'JamshedVesuna/vim-markdown-preview'
 Plug 'python-mode/python-mode'
+Plug 'w0rp/ale'
+Plug 'davidhalter/jedi-vim'
 " All of your Plugins must be added before the following line
 call plug#end()            " required
 
@@ -62,7 +62,6 @@ function FuzzyFind()
   endif
 endfunction
 
-nnoremap <c-p> :call FuzzyFind()<cr>
 
 let g:python_host_prog = '/usr/bin/python'
 " let g:python2_host_prog = '/usr/bin/python27'
@@ -80,7 +79,6 @@ set nocompatible
 set modelines=0
 
 set background=light
-" colorscheme base16-default-light
 colorscheme nord
 
 set tabstop=4
@@ -90,7 +88,8 @@ set expandtab
 
 set scrolloff=3
 set autoindent
-set showmode
+" remove the --INSERTION-- line as lightline does the job
+set noshowmode
 set showcmd
 set hidden
 set wildmenu
@@ -138,6 +137,10 @@ au FocusLost * :wa
 " Special key-bindings
 " ====================
 let mapleader = "\<Space>"
+" for any plugins that use this, make their keymappings use comma
+let mapleader = "\<Space>"
+let maplocalleader = "\<Space>"
+
 
 nnoremap / /\v
 vnoremap / /\v
@@ -166,14 +169,8 @@ nnoremap <Leader>, <esc>:nohl<CR>
 nnoremap <leader>v <C-w>v<C-w>l
 nnoremap <leader>h <C-w>s<C-w>l
 
-inoremap <F1> <ESC>
-nnoremap <F1> <ESC>
-vnoremap <F1> <ESC>
-
 " Movement
-" =========
 " bind Ctrl+<movement> keys to move around the windows, instead of using Ctrl+w + <movement>
-"
 nnoremap j gj
 nnoremap k gk
 nnoremap <C-h> <C-w>h
@@ -181,40 +178,88 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-"airline parameters
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#whitespace#enabled = 0
-let g:airline#extensions#tmuxline#enabled = 1
-let g:airline_theme='nord'
-" air-line
-let g:airline_powerline_fonts = 1
+" FZF (replaces Ctrl-P, FuzzyFinder and Command-T)
+set rtp+=/usr/local/opt/fzf
+set rtp+=~/.fzf
+nmap ; :Buffers<CR>
+nmap <Leader>r :Tags<CR>
+nmap <Leader>t :Files<CR>
+nmap <Leader>a :Ag<CR>
 
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-endif
+" ack -> ag
+let g:ackprg = 'ag --vimgrep'
 
-"syntastic
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
+" ALE
+let g:ale_sign_warning = '▲'
+let g:ale_sign_error = '✗'
+highlight link ALEWarningSign String
+highlight link ALEErrorSign Title
 
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list = 1
-" let g:syntastic_check_on_open = 1
-" let g:syntastic_check_on_wq = 0
+" GitGutter
+let g:gitgutter_sign_added = '∙'
+let g:gitgutter_sign_modified = '∙'
+let g:gitgutter_sign_removed = '∙'
+let g:gitgutter_sign_modified_removed = '∙'
 
-"Synstastic disabled by default
-" let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
-" nnoremap <C-w> :SyntasticCheck<CR> :SyntasticToggleMode<CR>
+" Lightline configuration
+" Lightline
+let g:lightline = {
+\ 'colorscheme': 'wombat',
+\ 'active': {
+\   'left': [['mode', 'paste'], ['filename', 'modified']],
+\   'right': [['lineinfo'], ['percent'], ['readonly', 'linter_warnings', 'linter_errors', 'linter_ok']]
+\ },
+\ 'component_expand': {
+\   'linter_warnings': 'LightlineLinterWarnings',
+\   'linter_errors': 'LightlineLinterErrors',
+\   'linter_ok': 'LightlineLinterOK'
+\ },
+\ 'component_type': {
+\   'readonly': 'error',
+\   'linter_warnings': 'warning',
+\   'linter_errors': 'error'
+\ },
+\ }
 
-" snippets
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+function! LightlineLinterWarnings() abort
+  let l:counts = ale#statusline#Count(bufnr(''))
+  let l:all_errors = l:counts.error + l:counts.style_error
+  let l:all_non_errors = l:counts.total - l:all_errors
+  return l:counts.total == 0 ? '' : printf('%d ◆', all_non_errors)
+endfunction
 
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
+function! LightlineLinterErrors() abort
+  let l:counts = ale#statusline#Count(bufnr(''))
+  let l:all_errors = l:counts.error + l:counts.style_error
+  let l:all_non_errors = l:counts.total - l:all_errors
+  return l:counts.total == 0 ? '' : printf('%d ✗', all_errors)
+endfunction
+
+function! LightlineLinterOK() abort
+  let l:counts = ale#statusline#Count(bufnr(''))
+  let l:all_errors = l:counts.error + l:counts.style_error
+  let l:all_non_errors = l:counts.total - l:all_errors
+  return l:counts.total == 0 ? '✓ ' : ''
+endfunction
+
+autocmd User ALELint call s:MaybeUpdateLightline()
+
+" Update and show lightline but only if it's visible (e.g., not in Goyo)
+function! s:MaybeUpdateLightline()
+  if exists('#lightline')
+    call lightline#update()
+  end
+endfunction
+
+" ProseMode function from statico.github.io
+function! ProseMode()
+  call goyo#execute(0, [])
+  set spell noci nosi noai nolist noshowmode noshowcmd
+  set complete+=s
+endfunction
+
+command! ProseMode call ProseMode()
+nmap \p :ProseMode<CR>
 
 " pymode settings
 let g:pymode_python = 'python3'
