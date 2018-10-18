@@ -9,7 +9,7 @@ fi
 . $HOME/.shells/functions
 . $HOME/.shells/exports
 #. $HOME/.shells/prompt
-                                   
+
 export TERMINFO=~/.terminfo
 
 # Path to the bash it configuration
