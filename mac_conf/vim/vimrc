@@ -1,0 +1,321 @@
+" My .vimrc file
+
+set nocompatible              " required
+filetype off                  " required
+
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall | source $MYVIMRC
+endif
+
+call plug#begin('~/.vim/plugged')
+" design
+Plug 'edkolev/tmuxline.vim'
+Plug 'arcticicestudio/nord-vim'
+Plug 'itchyny/lightline.vim'
+" git integration
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
+" integration of several tools
+Plug 'yuttie/comfortable-motion.vim'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-speeddating'
+Plug 'tpope/vim-repeat'
+Plug 'jiangmiao/auto-pairs'
+Plug 'junegunn/vim-easy-align'
+Plug 'nathanaelkane/vim-indent-guides'
+" File manipulation
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'mileszs/ack.vim'
+Plug 'justinmk/vim-sneak'
+Plug 'blueyed/vim-diminactive'
+Plug 'ervandew/supertab'
+Plug 'wellle/targets.vim'
+Plug 'bronson/vim-trailing-whitespace'
+Plug 'majutsushi/tagbar'
+Plug 'christoomey/vim-tmux-navigator'
+" Writing documentation
+Plug 'reedes/vim-pencil'
+Plug 'matze/vim-tex-fold'
+Plug 'junegunn/goyo.vim'
+Plug 'tpope/vim-markdown'
+" Languages integration
+Plug 'lervag/vimtex'
+Plug 'sheerun/vim-polyglot'
+" Plug 'python-mode/python-mode'
+Plug 'w0rp/ale'
+" Snippets configuration
+" Track the engine.
+" Plug 'SirVer/ultisnips'
+" Snippets are separated from the engine. Add this if you want them:
+" Plug 'honza/vim-snippets'
+" Simplenote
+Plug 'mrtazz/simplenote.vim'
+" All of your Plugins must be added before the following line
+call plug#end()            " required
+
+" Search from the git repo root, if we're in a repo, else the cwd
+function FuzzyFind()
+  " Contains a null-byte that is stripped.
+  let gitparent=system('git rev-parse --show-toplevel')[:-2]
+  if empty(matchstr(gitparent, '^fatal:.*'))
+    silent execute ':FZF -m ' . gitparent
+  else
+    silent execute ':FZF -m .'
+  endif
+endfunction
+let g:fzf_layout = { 'down': '~20%' }
+
+nnoremap <c-p> :call FuzzyFind()<cr>
+
+let g:python_host_prog = '/usr/bin/python'
+
+set encoding=utf8
+set guifont=Source\ Code\ Pro\ for\ Powerline\ Regular
+
+set omnifunc=syntaxcomplete#Complete
+set t_Co=256
+let base16colorspace=256
+set nocompatible
+set modelines=0
+
+set background=light
+colorscheme nord
+
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+set expandtab
+
+set scrolloff=3
+set autoindent
+" remove the --INSERTION-- line as lightline does the job
+set noshowmode
+set showcmd
+set hidden
+set wildmenu
+set wildmode=list:longest
+set visualbell
+set ttyfast
+set ruler
+set backspace=indent,eol,start
+set laststatus=2
+set number
+set cursorline
+hi CursorLine term=bold cterm=bold guibg=Grey40
+
+" Disable stupid backup and swap files - they trigger too many events
+" for file system watchers
+set nobackup
+set nowritebackup
+set noswapfile
+"
+" make yank copy to the global system clipboard
+set clipboard=unnamed
+
+"scheme for vimdiff to increase readibility
+if &diff
+        colorscheme blue
+    endif
+
+set ignorecase
+
+set smartcase
+set gdefault
+set incsearch
+set showmatch
+set hlsearch
+
+nnoremap <tab> %
+vnoremap <tab> %
+
+set wrap
+set textwidth=79
+set formatoptions=qrn1
+
+au FocusLost * :wa
+
+" Special key-bindings
+" ====================
+let mapleader = "\<Space>"
+" for any plugins that use this, make their keymappings use comma
+let mapleader = "\<Space>"
+let maplocalleader = "\<Space>"
+
+" easier moving between tabs
+map <Leader>p <esc>:bp<CR>
+map <Leader>n <esc>:bn<CR>
+
+"reselect the text just copied
+nnoremap <leader>v V`]
+
+"quicker escaping through jj
+inoremap jj <ESC>
+
+"toggle paste mode
+set pastetoggle=<F2>
+
+nmap <F8> :TagbarToggle<CR>
+
+" Easy align interactive
+vnoremap <silent> <Enter> :EasyAlign<cr>
+" Bind nohl
+nnoremap <Leader>, <esc>:nohl<CR>
+
+" Toggle spellchecking
+function! ToggleSpellCheck()
+  setlocal spell! spelllang=en_gb
+  if &spell
+    echo "Spellcheck ON"
+  else
+    echo "Spellcheck OFF"
+  endif
+endfunction
+nnoremap <silent> <Leader>S :call ToggleSpellCheck()<CR>
+
+" to split vertically
+nnoremap <leader>v <C-w>v<C-w>l
+nnoremap <leader>h <C-w>s<C-w>l
+
+" Movement
+" bind Ctrl+<movement> keys to move around the windows, instead of using Ctrl+w + <movement>
+nnoremap j gj
+nnoremap k gk
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+"Folding
+set foldmethod=indent
+set foldlevel=99
+
+" FZF (replaces Ctrl-P, FuzzyFinder and Command-T)
+set rtp+=/usr/local/opt/fzf
+set rtp+=~/.fzf
+
+" ack -> ag
+let g:ackprg = 'ag --vimgrep'
+
+" ALE
+nmap <silent> <Leader>j <Plug>(ale_previous_wrap)
+nmap <silent> <Leader>k <Plug>(ale_next_wrap)
+
+
+let g:ale_sign_warning = '▲'
+let g:ale_sign_error = '✗'
+highlight link ALEWarningSign String
+highlight link ALEErrorSign Title
+" ALE for Python
+let g:ale_virtualenv_dir_names = ['semilep', 'physics']
+
+" GitGutter
+let g:gitgutter_sign_added = '∙'
+let g:gitgutter_sign_modified = '∙'
+let g:gitgutter_sign_removed = '∙'
+let g:gitgutter_sign_modified_removed = '∙'
+
+" Lightline configuration
+" Lightline
+let g:lightline = {
+\ 'colorscheme': 'wombat',
+\ 'active': {
+\   'left': [['mode', 'paste'], ['filename', 'modified']],
+\   'right': [['lineinfo'], ['percent'], ['readonly', 'linter_warnings', 'linter_errors', 'linter_ok']]
+\ },
+\ 'component_expand': {
+\   'linter_warnings': 'LightlineLinterWarnings',
+\   'linter_errors': 'LightlineLinterErrors',
+\   'linter_ok': 'LightlineLinterOK'
+\ },
+\ 'component_type': {
+\   'readonly': 'error',
+\   'linter_warnings': 'warning',
+\   'linter_errors': 'error'
+\ },
+\ }
+
+function! LightlineLinterWarnings() abort
+  let l:counts = ale#statusline#Count(bufnr(''))
+  let l:all_errors = l:counts.error + l:counts.style_error
+  let l:all_non_errors = l:counts.total - l:all_errors
+  return l:counts.total == 0 ? '' : printf('%d ◆', all_non_errors)
+endfunction
+
+function! LightlineLinterErrors() abort
+  let l:counts = ale#statusline#Count(bufnr(''))
+  let l:all_errors = l:counts.error + l:counts.style_error
+  let l:all_non_errors = l:counts.total - l:all_errors
+  return l:counts.total == 0 ? '' : printf('%d ✗', all_errors)
+endfunction
+
+function! LightlineLinterOK() abort
+  let l:counts = ale#statusline#Count(bufnr(''))
+  let l:all_errors = l:counts.error + l:counts.style_error
+  let l:all_non_errors = l:counts.total - l:all_errors
+  return l:counts.total == 0 ? '✓ ' : ''
+endfunction
+
+autocmd User ALELint call s:MaybeUpdateLightline()
+
+" Update and show lightline but only if it's visible (e.g., not in Goyo)
+function! s:MaybeUpdateLightline()
+  if exists('#lightline')
+    call lightline#update()
+  end
+endfunction
+
+" ProseMode function from statico.github.io
+function! ProseMode()
+  call goyo#execute(0, [])
+  set spell noci nosi noai nolist noshowmode noshowcmd
+  set complete+=s
+endfunction
+
+command! ProseMode call ProseMode()
+nmap \p :ProseMode<CR>
+
+" latex settings (Latex-Box include in vim-polyglot)
+let g:polyglot_disabled = ['latex']
+
+" pymode settings
+let g:pymode_python = 'python3'
+let g:pymode_lint_on_write = 0
+let g:pymode_lint = 0
+let g:pymode_warnings = 0
+let g:pymode_rope = 0
+let g:pymode_rope_complete_on_dot = 0
+let g:pymode_folding = 0
+let g:pymode_virtualenv = 1
+
+
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+" let g:UltiSnipsExpandTrigger="<tab>"
+
+" If you want :UltiSnipsEdit to split your window.
+" let g:UltiSnipsEditSplit="vertical"
+ " let g:UltiSnipsUsePythonVersion = 3
+
+" Autosave function is any buffer is modified.
+function! AutoSave()
+" iterate on every loaded buffer.
+  for iBuffer in range(bufnr("$"))
+    " Recherche d'un buffer modifié
+    if getbufvar(iBuffer, "&modified")
+      " if one is found, everyone is saved.
+      :wa!
+      echo "Files saved."
+      return
+    endif
+  endfor
+endfunction
+set updatetime=1000
+autocmd CursorHold * call AutoSave()
+autocmd CursorHoldI * call AutoSave()
+
+source ~/.simplenoterc

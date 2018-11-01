@@ -1,9 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =7
-let g:netrw_dirhist_1='/home/renaudin/Documents/These/ANA-2015-045/latest/latex/.ropeproject'
-let g:netrw_dirhist_2='/etc/apt/sources.list.d'
-let g:netrw_dirhist_3='/home/renaudin/Documents/These/Lb2Lctaunu-analysis/analysis/.ropeproject'
-let g:netrw_dirhist_4='/home/renaudin/.config/terminator'
-let g:netrw_dirhist_5='/home/renaudin/.config'
-let g:netrw_dirhist_6='/etc/apt/sources.list.d'
-let g:netrw_dirhist_7='/home/renaudin'

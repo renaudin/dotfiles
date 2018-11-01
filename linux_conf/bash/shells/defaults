@@ -1,0 +1,31 @@
+# enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+if [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+fi
+    
+force_color_prompt=yes
+
+## some shopt options ##
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
+# correct minor spelling errors in cd
+shopt -s cdspell
+#include dotfiles in wildcard expansion, and match case-insensitively
+shopt -s dotglob
+shopt -s nocaseglob
+
+# Bash history
+export HISTCONTROL=ignoredups:erasedups:ignorespace
+export HISTSIZE=1000000
+export HISTFILESIZE=$HISTSIZE
+# allow multiple bash windows to write to the history
+shopt -s histappend
+
+# short paths
+export PROMPT_DIRTRIM=3
+export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+
+
