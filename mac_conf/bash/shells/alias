@@ -28,6 +28,9 @@ alias .....='cd ../../../..'
 # lxplus alias
 alias cern='ssh -Y lxplus'
 alias oxford='ssh -Y daussy-renaudin@pplxint8.physics.ox.ac.uk'
+alias sshoxford='ssh -Y daussy-renaudin@ssh.physics.ox.ac.uk'
+alias init_cern='kinit vrenaudi@CERN.CH'
+alias init_oxford='kinit daussy-renaudin@PHYSICS.OX.AC.UK'
 
 #tar
 alias newtar='tar -zcvf'

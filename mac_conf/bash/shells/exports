@@ -1,8 +1,6 @@
 #EDITOR
 export EDITOR='vim'
 
-export PATH="$PATH:/home/renaudin/Marp"
-
 # LHCB docs
 export DLHCB=svn+ssh://vrenaudi@cern.ch/reps/lhcbdocs
 
@@ -14,9 +12,11 @@ function rootconf(){
     cd ~/root
     . bin/thisroot.sh
     cd
-    
+
     # Export needed by ROOT
     export LD_LIBRARY_PATH=$ROOTSYS/lib:$PYTHONDIR/lib:$LD_LIBRARY_PATH
     export PATH=$ROOTSYS/bin:$PATH
     export PYTHONPATH=$ROOTSYS/lib:$PYTHONPATH
 }
+
+export PYTHONPATH=$PYTHONPATH:~/lb2lctaunu-analysis/analysis/analysis_tools/
