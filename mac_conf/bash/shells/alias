@@ -1,5 +1,5 @@
 # Cute shell shortcuts
-alias ls='ls -G'
+alias ls='ls --sort=extension --color=always'
 alias ll='ls -lh'
 alias l='ls -lh'
 alias lal='ls -alh'
@@ -11,13 +11,15 @@ alias less='less -R'
 alias grep='grep --color'
 alias tmux='tmux -2'
 
-alias za='zathura'
-
 # Some more, to avoid mistakes
 #alias rm='rm -vi'
 alias cp='cp -vi'
 alias mv='mv -vi'
 alias rm='rm -vi'
+
+# Copy using clipboard
+alias pbcopy='xclip -selection clipboard'
+alias pbpaste='xclip -selection clipboard -o'
 
 # Directory navigation aliases
 alias ..='cd ..'
@@ -27,17 +29,17 @@ alias .....='cd ../../../..'
 
 # lxplus alias
 alias cern='ssh -Y lxplus'
-alias oxford='ssh -Y daussy-renaudin@pplxint8.physics.ox.ac.uk'
+alias oxford='ssh -Y daussy-renaudin@pplxint11.physics.ox.ac.uk'
 alias sshoxford='ssh -Y daussy-renaudin@ssh.physics.ox.ac.uk'
 alias init_cern='kinit vrenaudi@CERN.CH'
 alias init_oxford='kinit daussy-renaudin@PHYSICS.OX.AC.UK'
 
+# oxford server configuation
+alias gammainit='source ~/gamma_env.sh'
+
 #tar
 alias newtar='tar -zcvf'
 alias extar='tar -zxvf'
-
-# git
-alias vlog='git log | vim -R -'
 
 #ROOT
 alias root='root -l'
@@ -45,10 +47,13 @@ alias root='root -l'
 #python shortcuts
 alias pc='python -c'
 alias ipy='ipython --matplotlib'
-alias condaconf='source ~/.conda_setup.sh'
-alias pyphysics='source ~/PyPhysics/bin/activate'
+alias condaconf2='source ~/conda_setup2.sh'
+alias pyphysics="source ~/PyPhysics/bin/activate"
 
 # Shortcut to test quick changes to bashrc
 alias reload='source ~/.bashrc'
-alias portinit='source ~/.macports_init.sh'
 
+# Batch aliases
+alias uqstat='qstat -u daussy-renaudin | less'
+alias huqstat='qstat -u daussy-renaudin | less | head'
+alias tuqstat='qstat -u daussy-renaudin | less | tail'
