@@ -34,12 +34,12 @@ alias sshoxford='ssh -Y daussy-renaudin@ssh.physics.ox.ac.uk'
 alias init_cern='kinit vrenaudi@CERN.CH'
 alias init_oxford='kinit daussy-renaudin@PHYSICS.OX.AC.UK'
 
-# oxford server configuation
-alias gammainit='source ~/gamma_env.sh'
-
 #tar
 alias newtar='tar -zcvf'
 alias extar='tar -zxvf'
+
+# git
+alias vlog='git log | vim -R -'
 
 #ROOT
 alias root='root -l'
@@ -48,7 +48,7 @@ alias root='root -l'
 alias pc='python -c'
 alias ipy='ipython --matplotlib'
 alias condaconf2='source ~/conda_setup2.sh'
-alias pyphysics="source ~/PyPhysics/bin/activate"
+alias pyphysics='source ~/PyPhysics/bin/activate'
 
 # Shortcut to test quick changes to bashrc
 alias reload='source ~/.bashrc'

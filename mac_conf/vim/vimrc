@@ -14,25 +14,22 @@ call plug#begin('~/.vim/plugged')
 Plug 'edkolev/tmuxline.vim'
 Plug 'arcticicestudio/nord-vim'
 Plug 'itchyny/lightline.vim'
+Plug 'mengelbrecht/lightline-bufferline'
 " git integration
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 " integration of several tools
-Plug 'yuttie/comfortable-motion.vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-eunuch'
-Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-repeat'
-Plug 'jiangmiao/auto-pairs'
-Plug 'junegunn/vim-easy-align'
+Plug 'tmsvg/pear-tree'
+
 Plug 'nathanaelkane/vim-indent-guides'
 " File manipulation
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'mileszs/ack.vim'
-Plug 'justinmk/vim-sneak'
+Plug 'junegunn/fzf.vim'
 Plug 'blueyed/vim-diminactive'
 Plug 'ervandew/supertab'
 Plug 'wellle/targets.vim'
@@ -40,40 +37,30 @@ Plug 'bronson/vim-trailing-whitespace'
 Plug 'majutsushi/tagbar'
 Plug 'christoomey/vim-tmux-navigator'
 " Writing documentation
-Plug 'reedes/vim-pencil'
 Plug 'matze/vim-tex-fold'
 Plug 'junegunn/goyo.vim'
 Plug 'tpope/vim-markdown'
 " Languages integration
 Plug 'lervag/vimtex'
 Plug 'sheerun/vim-polyglot'
-" Plug 'python-mode/python-mode'
 Plug 'w0rp/ale'
 " Snippets configuration
 " Track the engine.
-" Plug 'SirVer/ultisnips'
-" Snippets are separated from the engine. Add this if you want them:
-" Plug 'honza/vim-snippets'
-" Simplenote
-Plug 'mrtazz/simplenote.vim'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 " All of your Plugins must be added before the following line
 call plug#end()            " required
 
-" Search from the git repo root, if we're in a repo, else the cwd
-function FuzzyFind()
-  " Contains a null-byte that is stripped.
-  let gitparent=system('git rev-parse --show-toplevel')[:-2]
-  if empty(matchstr(gitparent, '^fatal:.*'))
-    silent execute ':FZF -m ' . gitparent
-  else
-    silent execute ':FZF -m .'
-  endif
-endfunction
-let g:fzf_layout = { 'down': '~20%' }
+" Special key-bindings
+" ====================
+let mapleader = "\<Space>"
+" for any plugins that use this, make their keymappings use comma
+let mapleader = "\<Space>"
+let maplocalleader = "\<Space>"
 
-nnoremap <c-p> :call FuzzyFind()<cr>
-
-let g:python_host_prog = '/usr/bin/python'
+nmap <Leader>f :GFiles<CR>
+nmap <Leader>F :Files<CR>
+let g:fzf_layout = { 'down': '~30%' }
 
 set encoding=utf8
 set guifont=Source\ Code\ Pro\ for\ Powerline\ Regular
@@ -81,7 +68,6 @@ set guifont=Source\ Code\ Pro\ for\ Powerline\ Regular
 set omnifunc=syntaxcomplete#Complete
 set t_Co=256
 let base16colorspace=256
-set nocompatible
 set modelines=0
 
 set background=light
@@ -94,7 +80,9 @@ set expandtab
 
 set scrolloff=3
 set autoindent
-" remove the --INSERTION-- line as lightline does the job
+
+set history=250
+
 set noshowmode
 set showcmd
 set hidden
@@ -109,8 +97,6 @@ set number
 set cursorline
 hi CursorLine term=bold cterm=bold guibg=Grey40
 
-" Disable stupid backup and swap files - they trigger too many events
-" for file system watchers
 set nobackup
 set nowritebackup
 set noswapfile
@@ -140,19 +126,10 @@ set formatoptions=qrn1
 
 au FocusLost * :wa
 
-" Special key-bindings
-" ====================
-let mapleader = "\<Space>"
-" for any plugins that use this, make their keymappings use comma
-let mapleader = "\<Space>"
-let maplocalleader = "\<Space>"
 
 " easier moving between tabs
 map <Leader>p <esc>:bp<CR>
 map <Leader>n <esc>:bn<CR>
-
-"reselect the text just copied
-nnoremap <leader>v V`]
 
 "quicker escaping through jj
 inoremap jj <ESC>
@@ -199,9 +176,6 @@ set foldlevel=99
 set rtp+=/usr/local/opt/fzf
 set rtp+=~/.fzf
 
-" ack -> ag
-let g:ackprg = 'ag --vimgrep'
-
 " ALE
 nmap <silent> <Leader>j <Plug>(ale_previous_wrap)
 nmap <silent> <Leader>k <Plug>(ale_next_wrap)
@@ -212,7 +186,7 @@ let g:ale_sign_error = '✗'
 highlight link ALEWarningSign String
 highlight link ALEErrorSign Title
 " ALE for Python
-let g:ale_virtualenv_dir_names = ['semilep', 'physics']
+let g:ale_virtualenv_dir_names = ['PyPhysics']
 
 " GitGutter
 let g:gitgutter_sign_added = '∙'
@@ -223,10 +197,14 @@ let g:gitgutter_sign_modified_removed = '∙'
 " Lightline configuration
 " Lightline
 let g:lightline = {
-\ 'colorscheme': 'wombat',
+\ 'colorscheme': 'seoul256',
 \ 'active': {
-\   'left': [['mode', 'paste'], ['filename', 'modified']],
-\   'right': [['lineinfo'], ['percent'], ['readonly', 'linter_warnings', 'linter_errors', 'linter_ok']]
+\   'left': [['mode', 'paste'],
+\           ['gitbranch', 'filename', 'modified', 'readonly'],
+\           ],
+\   'right':[['lineinfo'],['percent'],
+\           ['fileformat', 'fileencoding', 'filetype', 'linter_warnings', 'linter_errors', 'linter_ok'],
+\           ],
 \ },
 \ 'component_expand': {
 \   'linter_warnings': 'LightlineLinterWarnings',
@@ -236,9 +214,24 @@ let g:lightline = {
 \ 'component_type': {
 \   'readonly': 'error',
 \   'linter_warnings': 'warning',
-\   'linter_errors': 'error'
+\   'linter_errors': 'error'},
+\'component_function': {
+\   'gitbranch': 'fugitive#head',
 \ },
 \ }
+let g:lightline.separator = {
+    \   'left': '', 'right': ''
+  \}
+let g:lightline.subseparator = {
+    \   'left': '', 'right': '' 
+  \}
+
+set showtabline=2  " Show tabline
+set guioptions-=e  " Don't use GUI tabline
+let g:lightline.tabline          = {'left': [['buffers']], 'right': [['close']]}
+let g:lightline.component_expand = {'buffers': 'lightline#bufferline#buffers'}
+let g:lightline.component_type   = {'buffers': 'tabsel'}
+let g:lightline#bufferline#show_number=1
 
 function! LightlineLinterWarnings() abort
   let l:counts = ale#statusline#Count(bufnr(''))
@@ -283,23 +276,14 @@ nmap \p :ProseMode<CR>
 " latex settings (Latex-Box include in vim-polyglot)
 let g:polyglot_disabled = ['latex']
 
-" pymode settings
-let g:pymode_python = 'python3'
-let g:pymode_lint_on_write = 0
-let g:pymode_lint = 0
-let g:pymode_warnings = 0
-let g:pymode_rope = 0
-let g:pymode_rope_complete_on_dot = 0
-let g:pymode_folding = 0
-let g:pymode_virtualenv = 1
-
-
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-" let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
 
 " If you want :UltiSnipsEdit to split your window.
-" let g:UltiSnipsEditSplit="vertical"
- " let g:UltiSnipsUsePythonVersion = 3
+let g:UltiSnipsEditSplit="vertical"
+ let g:UltiSnipsUsePythonVersion = 3
 
 " Autosave function is any buffer is modified.
 function! AutoSave()
@@ -317,5 +301,3 @@ endfunction
 set updatetime=1000
 autocmd CursorHold * call AutoSave()
 autocmd CursorHoldI * call AutoSave()
-
-source ~/.simplenoterc
