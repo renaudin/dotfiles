@@ -119,6 +119,8 @@ set hlsearch
 
 nnoremap <tab> %
 vnoremap <tab> %
+" Disable Ex-mode until I found some use of it
+noremap Q <Nop>
 
 set wrap
 set textwidth=79
