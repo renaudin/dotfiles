@@ -70,7 +70,7 @@ function set_prompt_symbol () {
 # Determine active Python virtualenv details.
 function set_virtualenv () {
   if test -z "$VIRTUAL_ENV" ; then
-      PYTHON_VIRTUALENV=""
+      PYTHON_VIRTUALENV="${WHITE}|${COLOR_NONE}"
   else
       PYTHON_VIRTUALENV="${WHITE}|`basename \"$VIRTUAL_ENV\"`|${COLOR_NONE}"
   fi
