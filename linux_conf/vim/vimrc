@@ -46,16 +46,9 @@ Plug 'junegunn/goyo.vim'
 Plug 'tpope/vim-markdown'
 " Languages integration
 Plug 'lervag/vimtex'
-Plug 'sheerun/vim-polyglot'
-Plug 'python-mode/python-mode'
 Plug 'w0rp/ale'
 " Snippets configuration
 " Track the engine.
-Plug 'SirVer/ultisnips'
-" Snippets are separated from the engine. Add this if you want them:
-Plug 'honza/vim-snippets'
-" Simplenote
-Plug 'mrtazz/simplenote.vim'
 " All of your Plugins must be added before the following line
 call plug#end()            " required
 
@@ -211,8 +204,6 @@ let g:ale_sign_warning = '▲'
 let g:ale_sign_error = '✗'
 highlight link ALEWarningSign String
 highlight link ALEErrorSign Title
-" ALE for Python
-let g:ale_virtualenv_dir_names = ['semilep', 'physics']
 
 " GitGutter
 let g:gitgutter_sign_added = '∙'
@@ -280,27 +271,6 @@ endfunction
 command! ProseMode call ProseMode()
 nmap \p :ProseMode<CR>
 
-" latex settings (Latex-Box include in vim-polyglot)
-let g:polyglot_disabled = ['latex']
-
-" pymode settings
-let g:pymode_python = 'python3'
-let g:pymode_lint_on_write = 0
-let g:pymode_lint = 0
-let g:pymode_warnings = 0
-let g:pymode_rope = 0
-let g:pymode_rope_complete_on_dot = 0
-let g:pymode_folding = 0
-let g:pymode_virtualenv = 1
-
-
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<tab>"
-
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
- let g:UltiSnipsUsePythonVersion = 3
-
 " Autosave function is any buffer is modified.
 function! AutoSave()
 " iterate on every loaded buffer.
@@ -317,5 +287,3 @@ endfunction
 set updatetime=1000
 autocmd CursorHold * call AutoSave()
 autocmd CursorHoldI * call AutoSave()
-
-source ~/.simplenoterc
