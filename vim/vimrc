@@ -131,7 +131,7 @@ set formatoptions=qrn1
 au FocusLost * :wa
 
 " Special key-bindings
-" ====================
+" *******************
 let mapleader = "\<Space>"
 " for any plugins that use this, make their keymappings use comma
 let mapleader = "\<Space>"
@@ -201,8 +201,6 @@ let g:ale_sign_warning = '▲'
 let g:ale_sign_error = '✗'
 highlight link ALEWarningSign String
 highlight link ALEErrorSign Title
-" ALE for Python
-let g:ale_virtualenv_dir_names = ['semilep', 'physics']
 
 " GitGutter
 let g:gitgutter_sign_added = '∙'
