@@ -16,7 +16,6 @@ c.TerminalInteractiveShell.editing_mode = 'vi'
 #            'fancy.ipy'
 #        ]
 
-c.InteractiveShellApp.ignore_old_config=True
 
 c.InteractiveShell.autoindent = True
 c.InteractiveShell.colors = 'linux'
@@ -25,10 +24,10 @@ c.InteractiveShell.confirm_exit = False
 c.InteractiveShell.editor = 'vim'
 c.InteractiveShell.xmode = 'Context'
 
-c.PromptManager.in_template  = 'In [\#]: '
-c.PromptManager.in2_template = '   .\D.: '
-c.PromptManager.out_template = 'Out[\#]: '
-c.PromptManager.justify = True
+c.TerminalInteractiveShell.prompts_class.in_template  = 'In [\#]: '
+c.TerminalInteractiveShell.prompts_class.in2_template = '   .\D.: '
+c.TerminalInteractiveShell.prompts_class.out_template = 'Out[\#]: '
+c.TerminalInteractiveShell.prompts_class.justify = True
 
 c.PrefilterManager.multi_line_specials = True
 
