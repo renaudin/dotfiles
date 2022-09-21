@@ -11,27 +11,17 @@ alias less='less -R'
 alias grep='grep --color'
 alias tmux='tmux -2'
 
-alias za='zathura'
-
 # Some more, to avoid mistakes
 #alias rm='rm -vi'
 alias cp='cp -vi'
 alias mv='mv -vi'
 alias rm='rm -vi'
 
-# Copy using clipboard
-alias pbcopy='xclip -selection clipboard'
-alias pbpaste='xclip -selection clipboard -o'
-
 # Directory navigation aliases
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
-
-# lxplus alias
-alias cern='ssh -Y lxplus'
-alias oxford='ssh -Y daussy-renaudin@pplxint8.physics.ox.ac.uk'
 
 #tar
 alias newtar='tar -zcvf'
@@ -40,13 +30,8 @@ alias extar='tar -zxvf'
 # git
 alias vlog='git log | vim -R -'
 
-#ROOT
-alias root='root -l'
-
 #python shortcuts
 alias pc='python -c'
-alias ipy='ipython --matplotlib'
-alias condaconf='source ~/.conda_setup.sh'
 
 # Shortcut to test quick changes to bashrc
 alias reload='source ~/.bashrc'

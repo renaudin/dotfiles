@@ -72,14 +72,7 @@ function set_virtualenv () {
   if test -z "$VIRTUAL_ENV" ; then
       PYTHON_VIRTUALENV="${WHITE}|${COLOR_NONE}"
   else
-      PYTHON_VIRTUALENV="${WHITE}|`basename \"$VIRTUAL_ENV\"`|${COLOR_NONE}"
-  fi
-}
-function set_condaenv () {
-  if test -z "$CONDA_DEFAULT_ENV" ; then
-      PYTHON_CONDAENV="${WHITE}|${COLOR_NONE}"
-  else
-      PYTHON_CONDAENV="${WHITE}|`basename \"$CONDA_DEFAULT_ENV\"`|${COLOR_NONE}"
+      PYTHON_VIRTUALENV="${WHITE}|`basename \"$(pyenv version-name)\"`|${COLOR_NONE}"
   fi
 }
 
@@ -91,13 +84,12 @@ function set_bash_prompt () {
 
   # Set the PYTHON_VIRTUALENV variable.
   set_virtualenv
-  set_condaenv
 
   # Set the BRANCH variable.
   set_git_branch
 
   # Set the bash prompt variable.
-  PS1="\t${PYTHON_CONDAENV}${PYTHON_VIRTUALENV}${BLUE}\u${COLOR_NONE}@${GREEN}\h${COLOR_NONE}:${YELLOW}\w${COLOR_NONE}${BRANCH}${PROMPT_SYMBOL} "
+  PS1="\t${PYTHON_VIRTUALENV}${BLUE}\u${COLOR_NONE}@${GREEN}\h${COLOR_NONE}:${YELLOW}\w${COLOR_NONE}${BRANCH}${PROMPT_SYMBOL} "
 }
 
 # Tell bash to execute this function just before displaying its prompt.

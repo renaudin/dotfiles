@@ -45,7 +45,10 @@ Plug 'matze/vim-tex-fold'
 Plug 'junegunn/goyo.vim'
 Plug 'tpope/vim-markdown'
 " Languages integration
+Plug 'lervag/vimtex'
 Plug 'w0rp/ale'
+Plug 'sonph/onehalf', { 'rtp': 'vim'  }
+
 " All of your Plugins must be added before the following line
 call plug#end()            " required
 
@@ -74,8 +77,8 @@ let base16colorspace=256
 set nocompatible
 set modelines=0
 
-set background=light
-colorscheme nord
+set background=dark
+colorscheme onehalfdark
 
 set tabstop=4
 set shiftwidth=4
@@ -131,7 +134,7 @@ set formatoptions=qrn1
 au FocusLost * :wa
 
 " Special key-bindings
-" *******************
+" ====================
 let mapleader = "\<Space>"
 " for any plugins that use this, make their keymappings use comma
 let mapleader = "\<Space>"
@@ -201,6 +204,8 @@ let g:ale_sign_warning = '▲'
 let g:ale_sign_error = '✗'
 highlight link ALEWarningSign String
 highlight link ALEErrorSign Title
+" ALE for Python
+let g:ale_virtualenv_dir_names = ['semilep', 'physics']
 
 " GitGutter
 let g:gitgutter_sign_added = '∙'
@@ -211,7 +216,7 @@ let g:gitgutter_sign_modified_removed = '∙'
 " Lightline configuration
 " Lightline
 let g:lightline = {
-\ 'colorscheme': 'wombat',
+\ 'colorscheme': 'onehalfdark',
 \ 'active': {
 \   'left': [['mode', 'paste'], ['filename', 'modified']],
 \   'right': [['lineinfo'], ['percent'], ['readonly', 'linter_warnings', 'linter_errors', 'linter_ok']]

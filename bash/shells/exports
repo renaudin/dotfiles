@@ -1,4 +1,9 @@
 #EDITOR
 export EDITOR='vim'
 
-export MARKERS_PROCESSING_ROOT=~/Projects/markers-processing/
+# WSL DISPLAY variable for xserver
+export DISPLAY=$(grep nameserver /etc/resolv.conf | awk '{print $2}'):0.0
+export LIBGL_ALWAYS_INDIRECT=1
+
+export XDG_RUNTIME_DIR='/tmp/runtime-victor'
+

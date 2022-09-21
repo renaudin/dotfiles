@@ -1,8 +1,5 @@
 #no beep in tab completion
 set bell-style none
- 
-set prefer-visual-bell
-
 # for vi mode
 set editing-mode vi
 $if mode=vi
