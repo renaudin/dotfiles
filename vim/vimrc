@@ -51,7 +51,6 @@ Plug 'sheerun/vim-polyglot'
 Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'dense-analysis/ale'
 Plug 'jmcantrell/vim-virtualenv'
-Plug 'psf/black', { 'branch': 'stable' }
 Plug 'deoplete-plugins/deoplete-jedi'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins'  }
 Plug 'maximbaz/lightline-ale'
@@ -139,8 +138,8 @@ au FocusLost * :wa
 
 " format specifics
 let g:vim_json_syntax_conceal = 0
-let g:syntastic_python_python_exec = '/home/victor/envs/nvim/bin/python'
-let g:python3_host_prog = '/home/victor/envs/nvim/bin/python'
+let g:syntastic_python_python_exec = '/home/victor/envs/python3_rapids/bin/python'
+let g:python3_host_prog = '/home/victor/envs/python3_rapids/bin/python'
 
 " debugging shortcuts
 nnoremap <Leader>dd :call vimspector#Launch()<CR>
@@ -226,16 +225,20 @@ let g:deoplete#enable_at_startup = 1
 nmap <silent> <leader>aj :ALENext<cr>
 nmap <silent> <leader>ak :ALEPrevious<cr>
 autocmd FileType python map <buffer> <F12> :ALEGoToDefinition<CR>
+autocmd FileType python map <buffer> <leader><F12> :ALEFindReferences<CR>
 nnoremap K :ALEHover<CR>
 let g:ale_linters = {
-      \   'python': ['flake8', 'pylint', 'pylsp'],
+      \   'python': ['flake8', 'pylsp'],
       \}
 let g:ale_fixers = {
       \   'python': ['black'],
       \}
+let g:pymode_lint_ignore = ["E501", "W",]
+let g:ale_python_black_options='--line-length=120'
+let g:ale_python_flake8_options = '--max-line-length=120'
+
 nmap <F10> :ALEFix<CR>
 let g:ale_fix_on_save = 1
-let g:ale_floating_window_border = ['│', '─', '╭', '╮', '╯', '╰', '│', '─']
 let g:ale_completion_enabled = 1
 let g:ale_linters_explicit = 1
 let g:ale_sign_column_always = 1
