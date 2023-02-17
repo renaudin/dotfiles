@@ -32,6 +32,7 @@ Plug 'junegunn/vim-easy-align'
 Plug 'nathanaelkane/vim-indent-guides'
 " File manipulation
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 Plug 'justinmk/vim-sneak'
 Plug 'blueyed/vim-diminactive'
 Plug 'ervandew/supertab'
@@ -49,6 +50,7 @@ Plug 'preservim/nerdtree'
 Plug 'puremourning/vimspector'
 Plug 'sheerun/vim-polyglot'
 Plug 'Vimjas/vim-python-pep8-indent'
+Plug 'heavenshell/vim-pydocstring', { 'do': 'make install', 'for': 'python' }
 Plug 'dense-analysis/ale'
 Plug 'jmcantrell/vim-virtualenv'
 Plug 'deoplete-plugins/deoplete-jedi'
@@ -112,7 +114,7 @@ set nowritebackup
 set noswapfile
 "
 " make yank copy to the global system clipboard
-set clipboard=unnamed
+" set clipboard=unnamed
 
 "scheme for vimdiff to increase readibility
 if &diff
@@ -140,6 +142,7 @@ au FocusLost * :wa
 let g:vim_json_syntax_conceal = 0
 let g:syntastic_python_python_exec = '/home/victor/envs/python3_rapids/bin/python'
 let g:python3_host_prog = '/home/victor/envs/python3_rapids/bin/python'
+let g:pydocstring_doq_path = '/home/victor/envs/python3_rapids/bin/doq'
 
 " debugging shortcuts
 nnoremap <Leader>dd :call vimspector#Launch()<CR>
