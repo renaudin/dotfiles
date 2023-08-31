@@ -98,6 +98,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'puremourning/vimspector'
 Plug 'heavenshell/vim-pydocstring', { 'do': 'make install', 'for': 'python' }
 Plug 'vimwiki/vimwiki'
+Plug 'ervandew/supertab'
 
 "*****************************************************************************
 "*****************************************************************************
@@ -272,7 +273,7 @@ let g:nerdtree_tabs_focus_on_files=1
 let g:NERDTreeMapOpenInTabSilent = '<RightMouse>'
 let g:NERDTreeWinSize = 50
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.db,*.sqlite,*node_modules/
-nnoremap <silent> <F2> :NERDTreeFind<CR>
+nnoremap <silent> <F4> :NERDTreeFind<CR>
 nnoremap <silent> <F3> :NERDTreeToggle<CR>
 
 " grep.vim
@@ -400,7 +401,7 @@ let g:UltiSnipsJumpBackwardTrigger="<c-b>"
 let g:UltiSnipsEditSplit="vertical"
 
 " Tagbar
-nmap <silent> <F4> :TagbarToggle<CR>
+nmap <silent> <F8> :TagbarToggle<CR>
 let g:tagbar_autofocus = 1
 
 " Disable visualbell
@@ -482,16 +483,18 @@ nnoremap K :ALEHover<CR>
 nmap <F10> :ALEFix<CR>
 autocmd FileType python map <buffer> <F12> :ALEGoToDefinition<CR>
 let g:ale_linters = {
-      \   'python': ['flake8', 'jedils'],
+      \   'python': ['flake8', 'mypy'],
       \}
 let g:ale_fixers = {
-      \   'python': ['black'],
+      \   'python': ['black', 'isort'],
       \}
 let g:ale_fix_on_save = 1
 let g:ale_floating_window_border = ['│', '─', '╭', '╮', '╯', '╰', '│', '─']
 let g:ale_completion_enabled = 1
 let g:ale_linters_explicit = 1
 let g:ale_sign_column_always = 1
+let g:ale_python_flake8_options = '--max-line-length=120'
+let g:ale_python_black_options = '--line-length=120'
 
 " vim-airline
 let g:airline#extensions#virtualenv#enabled = 1
@@ -499,6 +502,9 @@ let g:airline#extensions#virtualenv#enabled = 1
 " Syntax highlight
 let python_highlight_all = 1
 
+" vim-pydocstring
+let g:pydocstring_enable_mapping = 0
+let g:pydocstring_formatter = 'sphinx'
 
 " typescript
 let g:yats_host_keyword = 1

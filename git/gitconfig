@@ -8,3 +8,6 @@
 	default = simple
 [user]
 	name = Victor Daussy-Renaudin
+	
+[credential]
+	helper = store
