@@ -1,0 +1,14 @@
+jupyterlab_templates v0.3.1
+nbdime-jupyterlab v2.1.1
+jupyterlab-execute-time v2.1.0
+jupyter-matplotlib v0.10.0
+@jupyterlab/git v0.34.0
+@krassowski/jupyterlab-lsp v3.9.1
+@aquirdturtle/collapsible_headings v3.1.0
+@ryantam626/jupyterlab_code_formatter v1.4.10
+@jupyter-widgets/jupyterlab-manager v3.0.0
+@ijmbarr/jupyterlab_spellchecker v0.7.2
+@aquirdturtle/collapsible_headings
+@arbennett/base16-nord v0.1.5
+@jupyterlab/debugger v3.2.9
+
